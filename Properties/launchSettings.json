@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "teknologisk_functionapp": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7124",
+      "launchBrowser": false
+    }
+  }
+}
