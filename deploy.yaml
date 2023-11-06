@@ -3,6 +3,9 @@ parameters:
     type: string
   - name: ServiceConnection #this is needed as an parameters, can not refere fro variablegroup
     type: string
+  - name: ResourceGroupName
+    type: string
+
   - name: AppName
     type: string
   - name: Location
@@ -12,7 +15,7 @@ stages:
   - stage: ${{ parameters.EnvironmentPostFix }}Release
     variables:
       - name: resourceGroup
-        value: ${{ parameters.AppName }}-group
+        value: ${{ parameters.ResourceGroupName }}-rg
       - name: webAppName
         value: ${{ parameters.AppName }}
     displayName: Release to ${{ parameters.EnvironmentPostFix }}
