@@ -14,16 +14,16 @@ namespace teknologisk_functionapp
             _logger = logger;
         }
 
-        [Function(nameof(ReverserFunction))]
+        //[Function("Reverser")]
         //[BlobOutput("output/{rand-guid}.txt", Connection = "ArchiveStorageConnectionString")]
-        public string Run([BlobTrigger("input/{name}", Connection = "ArchiveStorageConnectionString")] Stream stream, string name)
+        public string Run([BlobTrigger("input/{name}", Connection = "ArchiveStorageConnectionString")] string input)
         {
-            using var blobStreamReader = new StreamReader(stream);
-            var content = blobStreamReader.ReadToEnd();
-            char[] reversed = content.ToCharArray();
+            //using var blobStreamReader = new StreamReader(stream);
+            //var content = blobStreamReader.ReadToEnd();
+            char[] reversed = input.ToCharArray();
             Array.Reverse(reversed);    
-            var reversedString = new string(reversed);  
-            _logger.LogInformation($"C# Blob trigger function Processed blob\n Name: {name} \n Data: {reversedString}");
+            string reversedString = new string(reversed);  
+            //_logger.LogInformation($"C# Blob trigger function Processed blob\n Name: {name} \n Data: {reversedString}");
         
             return reversedString;
         }
