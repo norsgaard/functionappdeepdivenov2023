@@ -1,0 +1,34 @@
+parameters:
+  - name: EnvironmentPostFix
+    type: string
+  - name: ServiceConnection #this is needed as an parameters, can not refere fro variablegroup
+    type: string
+  - name: AppName
+    type: string
+  - name: Location
+    type: string
+
+stages:
+  - stage: ${{ parameters.EnvironmentPostFix }}Release
+    variables:
+      - name: resourceGroup
+        value: ${{ parameters.AppName }}-group
+      - name: webAppName
+        value: ${{ parameters.AppName }}
+    displayName: Release to ${{ parameters.EnvironmentPostFix }}
+    jobs:
+      - deployment: ${{ parameters.EnvironmentPostFix }}
+        displayName: Release to ${{ parameters.EnvironmentPostFix }}
+        environment: ${{ parameters.EnvironmentPostFix }}
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                #Log Analytics
+                - task: AzureFunctionApp@2
+                  displayName: "Publish Function App to Azure"
+                  inputs:
+                    azureSubscription: ${{ parameters.ServiceConnection }}
+                    appType: "functionApp"
+                    appName: $(webAppName)
+                    package: "$(Pipeline.Workspace)/WebApp/*.zip"

@@ -1,0 +1,50 @@
+trigger:
+  branches:
+    include:
+      - master
+
+variables:
+  - group: Common
+  - name: webAppPath
+    value: "teknologisk_functionapp.csproj"
+  - name: buildConfiguration
+    value: Debug
+pool:
+  vmImage: ubuntu-latest
+
+stages:
+  - stage: Build
+    jobs:
+      - job: Job_1
+        displayName: "Build and publish code"
+        steps:
+          - checkout: self
+
+          - task: DotNetCoreCLI@2
+            displayName: "Publish/Build Web App - $(buildConfiguration)"
+            inputs:
+              command: "publish"
+              projects: $(webAppPath)
+              publishWebProjects: false
+              arguments: "-o $(Build.ArtifactStagingDirectory)/WebApp --configuration $(buildConfiguration)"
+
+          - task: PublishPipelineArtifact@1
+            displayName: "Publish Web App to Pipeline"
+            inputs:
+              targetPath: "$(Build.ArtifactStagingDirectory)/WebApp"
+              artifact: WebApp
+              publishLocation: "pipeline"
+
+  - template: deploy.yaml
+    parameters:
+      EnvironmentPostFix: test
+      ServiceConnection: $(test.connection)
+      AppName: $(AppName)
+      Location: westeurope
+
+  - template: deploy.yaml
+    parameters:
+      EnvironmentPostFix: prod
+      ServiceConnection: $(prod.connection)
+      AppName: $(AppName)
+      Location: westeurope
