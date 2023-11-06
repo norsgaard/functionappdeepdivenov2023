@@ -37,6 +37,7 @@ stages:
 
   - template: deploy.yaml
     parameters:
+      ResourceGroupName: $(ResourceGroupName)
       EnvironmentPostFix: test
       ServiceConnection: $(test.connection)
       AppName: $(AppName)
@@ -44,6 +45,7 @@ stages:
 
   - template: deploy.yaml
     parameters:
+      ResourceGroupName: $(ResourceGroupName)
       EnvironmentPostFix: prod
       ServiceConnection: $(prod.connection)
       AppName: $(AppName)
