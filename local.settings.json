@@ -3,6 +3,8 @@
   "Values": {
     "AzureWebJobsStorage": "UseDevelopmentStorage=true",
     "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
-    "ArchiveStorageConnectionString": "DefaultEndpointsProtocol=https;AccountName=teknofuncarchivest;AccountKey=1230ILuRx1txAZoOTjYr8eri9XiSb6qpFh74GeeNqFJxNOYIn75uYDaXoGEnoEAlIbsj3E6ZJ8BEAsC+AStnA7zWQ==;EndpointSuffix=core.windows.net"
+    //"ArchiveStorageConnectionString": "DefaultEndpointsProtocol=https;AccountName=teknofuncarchivest;AccountKey=1230ILuRx1txAZoOTjYr8eri9XiSb6qpFh74GeeNqFJxNOYIn75uYDaXoGEnoEAlIbsj3E6ZJ8BEAsC+AStnA7zWQ==;EndpointSuffix=core.windows.net",
+    "ArchiveStorageConnectionString__blobServiceUri": "https://teknofuncarchivest.blob.core.windows.net",
+    "ArchiveStorageConnectionString__queueServiceUri": "https://teknofuncarchivest.queue.core.windows.net"
   }
 }
