@@ -15,8 +15,8 @@ namespace teknologisk_functionapp
         }
 
         [Function("Reverser")]
-        [BlobOutput("output/{rand-guid}.txt", Connection = "ArchiveStorageConnectionString")]
-        public string Run([BlobTrigger("input/{name}", Connection = "ArchiveStorageConnectionString")] string input)
+        [BlobOutput("output/{rand-guid}.txt")]
+        public string Run([BlobTrigger("input/{name}")] string input)
         {
             //using var blobStreamReader = new StreamReader(stream);
             //var content = blobStreamReader.ReadToEnd();
