@@ -1,0 +1,8 @@
+{
+    "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+    "ArchiveStorageConnectionString": "DefaultEndpointsProtocol=https;AccountName=teknofuncarchivest;AccountKey=0ILuRx1txAZoOTjYr8eri9XiSb6qpFh74GeeNqFJxNOYIn75uYDaXoGEnoEAlIbsj3E6ZJ8BEAsC+AStnA7zWQ==;EndpointSuffix=core.windows.net"
+  }
+}
