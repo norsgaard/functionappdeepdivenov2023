@@ -14,8 +14,8 @@ namespace teknologisk_functionapp
             _logger = logger;
         }
 
-        //[Function("Reverser")]
-        //[BlobOutput("output/{rand-guid}.txt", Connection = "ArchiveStorageConnectionString")]
+        [Function("Reverser")]
+        [BlobOutput("output/{rand-guid}.txt", Connection = "ArchiveStorageConnectionString")]
         public string Run([BlobTrigger("input/{name}", Connection = "ArchiveStorageConnectionString")] string input)
         {
             //using var blobStreamReader = new StreamReader(stream);
