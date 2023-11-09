@@ -18,7 +18,7 @@ namespace teknologisk_functionapp
         public HttpResponseData Run([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequestData req)
         {
             _logger.LogInformation("C# HTTP trigger function processed a request.");
-
+            // This causes an error to occur in the function, which can be viewed in logs/metrics.
             throw new Exception($"I crashed the function at {DateTime.UtcNow}");
 
             

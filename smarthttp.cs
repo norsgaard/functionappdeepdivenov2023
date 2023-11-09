@@ -17,6 +17,7 @@ namespace teknologisk.functionapp
         [Function("smarthttp")]
         public HttpResponseData Run([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequestData req)
         {
+            // Simple http trigger which can be called with either GET or POST, using the function key as authorization.
             _logger.LogInformation("C# HTTP trigger function processed a request.");
 
             var response = req.CreateResponse(HttpStatusCode.OK);

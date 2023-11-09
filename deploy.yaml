@@ -1,7 +1,8 @@
+## These are parameters sent from the build.yaml file
 parameters:
   - name: EnvironmentPostFix
     type: string
-  - name: ServiceConnection #this is needed as an parameters, can not refere fro variablegroup
+  - name: ServiceConnection 
     type: string
   - name: ResourceGroupName
     type: string
@@ -14,6 +15,7 @@ parameters:
 stages:
   - stage: ${{ parameters.EnvironmentPostFix }}Release
     variables:
+      ## The name of the resource group, where the function app should be deployed to.
       - name: resourceGroup
         value: ${{ parameters.ResourceGroupName }}-rg
       - name: webAppName
@@ -26,8 +28,8 @@ stages:
         strategy:
           runOnce:
             deploy:
+              ## Deploy the Function App using the built in Azure Pipeline Task named AzureFunctionApp@2
               steps:
-                #Log Analytics
                 - task: AzureFunctionApp@2
                   displayName: "Publish Function App to Azure"
                   inputs:

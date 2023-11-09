@@ -4,9 +4,12 @@ trigger:
       - main
 
 variables:
+  ## Import variables from library variable group named Common
   - group: Common
+  ## C# project file name, to be used when compiling Function App code
   - name: webAppPath
     value: "teknologisk_functionapp.csproj"
+  ## Build configuration. Should be Debug / Release build
   - name: buildConfiguration
     value: Debug
 pool:
@@ -15,6 +18,7 @@ pool:
 stages:
   - stage: Build
     jobs:
+      ## Build the Function App code and add to DevOps pipeline
       - job: Job_1
         displayName: "Build and publish code"
         steps:
@@ -35,10 +39,12 @@ stages:
               artifact: WebApp
               publishLocation: "pipeline"
 
+  ## Run deploy.yaml file for Test environment. Uses ResourceGroupName, test.Connection, AppName from Common library variable group in DevOps
   - template: deploy.yaml
     parameters:
       ResourceGroupName: $(ResourceGroupName)
       EnvironmentPostFix: test
+      ## This is the Service Connection name. This can be created in DevOps under Project.
       ServiceConnection: $(test.connection)
       AppName: $(AppName)
       Location: westeurope

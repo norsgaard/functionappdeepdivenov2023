@@ -16,6 +16,7 @@ namespace teknologisk.functionapp
         [Function("iamalive")]
         public void Run([TimerTrigger("0 */1 * * * *")] TimerInfo myTimer)
         {
+            // This is just a simple example of a function running every minute, that outputs something to the logs.
             _logger.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
             
             if (myTimer.ScheduleStatus is not null)

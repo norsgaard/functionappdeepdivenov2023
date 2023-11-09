@@ -18,12 +18,15 @@ namespace teknologisk_functionapp
         [BlobOutput("output/{rand-guid}.txt", Connection = "ArchiveStorageConnectionString")]
         public string Run([BlobTrigger("input/{name}", Connection = "ArchiveStorageConnectionString")] string input)
         {
-            //using var blobStreamReader = new StreamReader(stream);
-            //var content = blobStreamReader.ReadToEnd();
+            // This function reads a Blob (file) placed in the "input" container of the Storage Account, that the connection ArchiveStorageConnectionString is pointed at. 
+            // The setup here is that the function app is using Managed Identities to gain access to the Storage Account 
+            // See local.settings.json for an example connection, when using this type of binding
+            //
+            // Note: The standard BlobTrigger template using streams, which does not working when using Output Binding. This is changed to string in this example, i.e. the variable "input"
+
             char[] reversed = input.ToCharArray();
             Array.Reverse(reversed);    
             string reversedString = new string(reversed);  
-            //_logger.LogInformation($"C# Blob trigger function Processed blob\n Name: {name} \n Data: {reversedString}");
         
             return reversedString;
         }
