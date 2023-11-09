@@ -14,7 +14,7 @@ namespace teknologisk_functionapp
             _logger = loggerFactory.CreateLogger<CrashMe>();
         }
 
-        //[Function("CrashMe")]
+        [Function("CrashMe")]
         public HttpResponseData Run([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequestData req)
         {
             _logger.LogInformation("C# HTTP trigger function processed a request.");
